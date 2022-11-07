@@ -8,14 +8,11 @@ export default function Home({ session }) {
   const [position, setPosition] = useState(null);
   const [entries, setEntries] = useState(null);
 
-
   useEffect(() => {
     if (user) {
-        fetchEntries();
+      fetchEntries();
     }
-    }, [user]);
-
-
+  }, [user]);
 
   //Async fucnrtion to post data to the database with used id
   const postEntry = async () => {
@@ -24,21 +21,21 @@ export default function Home({ session }) {
       .insert([{ user_id: user.id, company: company, position: position }]);
     if (error) console.log("error", error);
     else {
-        console.log("success", data);
-        fetchEntries();
+      console.log("success", data);
+      fetchEntries();
     }
   };
   const fetchEntries = async () => {
     const { data, error } = await supabase
-        .from("entries")
-        .select("*")
-        .eq("user_id", user.id);
+      .from("entries")
+      .select("*")
+      .eq("user_id", user.id);
     if (error) console.log("error", error);
     else {
-        console.log("success", data); 
-        setEntries(data);
-    } 
+      console.log("success", data);
+      setEntries(data);
     }
+  };
 
   return (
     <div>
@@ -58,20 +55,26 @@ export default function Home({ session }) {
         onChange={(e) => setPosition(e.target.value)}
       />
       <button onClick={postEntry}>Submit</button>
-        <div>
-            {entries && entries.map((entry) => (
-                <div key={entry.id} className="flex flex-row justify-between w-1/2 border border-stone-800 rounded-md p-2">
-                    <div>{entry.company}</div>
-                    <div>{entry.position}</div>
-                </div>
-            ))}
-        </div>
-        <div>
-        <button className="button block" onClick={() => supabase.auth.signOut()}>
+      <div>
+        {entries &&
+          entries.map((entry) => (
+            <div
+              key={entry.id}
+              className="flex flex-row justify-between w-1/2 border border-stone-800 rounded-md p-2"
+            >
+              <div>{entry.company}</div>
+              <div>{entry.position}</div>
+            </div>
+          ))}
+      </div>
+      <div>
+        <button
+          className="button block"
+          onClick={() => supabase.auth.signOut()}
+        >
           Sign Out
         </button>
       </div>
     </div>
-
   );
 }
