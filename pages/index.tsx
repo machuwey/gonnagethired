@@ -2,21 +2,37 @@
 import { Auth, ThemeSupa } from '@supabase/auth-ui-react'
 import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react'
 import Home from '../components/Home'
-
+import { useState } from 'react';
 const Login = () => {
   const session = useSession()
   const supabase = useSupabaseClient()
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
+  async function signInWithEmail() {
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: email,
+      password: password,
+    })
+  }
   return (
     <div className="container" style={{ padding: '50px 0 100px 0' }}>
       {!session ? (
-        
-        <Auth 
-        supabaseClient={supabase} 
-        appearance={{ theme: ThemeSupa }}
-         theme="dark" />
-      
-      
+        <div>
+      <input
+        type="email"
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
+      <input
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <button onClick={signInWithEmail}>Sign in</button>
+        </div>
       ) : (
         <Home session={session} />
       )}
