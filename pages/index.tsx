@@ -16,7 +16,8 @@ const Login = () => {
     })
   }
   return (
-    <div className="container" style={{ padding: '50px 0 100px 0' }}>
+    <div className="container w-full flex flex-col items-center justify-center"
+    style={{ padding: '25px 0 25px 0' }}>
       {!session ? (
         <div>
       <input
