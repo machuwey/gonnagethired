@@ -11,11 +11,11 @@ const Login = () => {
     <div className="container" style={{ padding: '50px 0 100px 0' }}>
       {!session ? (
         
-        //<Auth 
-        //supabaseClient={supabase} 
-        //appearance={{ theme: ThemeSupa }}
-         //theme="dark" />
-      <div>THis </div>
+        <Auth 
+        supabaseClient={supabase} 
+        appearance={{ theme: ThemeSupa }}
+         theme="dark" />
+      
       
       ) : (
         <Home session={session} />
