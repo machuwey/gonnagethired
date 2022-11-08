@@ -1,9 +1,12 @@
 import React from "react";
 import { useState } from "react";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 const Modal = ({ isVisable, onClose }) => {
   const [company, setCompany] = useState(null);
   const [position, setPosition] = useState(null);
+  const [date, setDate] = useState(new Date());
   const user = useUser();
   const supabase = useSupabaseClient();
   if (!isVisable) return null;
@@ -51,6 +54,9 @@ const Modal = ({ isVisable, onClose }) => {
             value={position || ""}
             onChange={(e) => setPosition(e.target.value)}
           />
+
+          <DatePicker selected={date} onChange={(date) => setDate(date)} dateFormat="dd/MM/yyyy" />
+
           <button onClick={postEntry}>Submit</button>
         </div>
       </div>

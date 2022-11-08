@@ -5,8 +5,6 @@ export default function Home({ session }) {
   const user = useUser();
   const supabase = useSupabaseClient();
   const [showModal, setShowModal] = useState(false);
-  const [company, setCompany] = useState(null);
-  const [position, setPosition] = useState(null);
   const [entries, setEntries] = useState(null);
 
   useEffect(() => {
@@ -89,7 +87,7 @@ export default function Home({ session }) {
         >
           Sign Out
         </button>
-
+      
         
         <Modal isVisable={showModal} onClose={() => setShowModal(false)} />
       </div>
