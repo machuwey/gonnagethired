@@ -17,9 +17,10 @@ const Modal = ({ isVisable, onClose }) => {
 
   //Async fucnrtion to post data to the database with used id
   const postEntry = async () => {
+    console.log(date)
     const { data, error } = await supabase
       .from("entries")
-      .insert([{ user_id: user.id, company: company, position: position }]);
+      .insert([{ user_id: user.id, company: company, position: position, date: date }]);
     if (error) console.log("error", error);
     else {
       console.log("success", data);
