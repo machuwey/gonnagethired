@@ -73,6 +73,7 @@ export default function Home({ session }) {
             >
               <div>{entry.company}</div>
               <div>{entry.position}</div>
+              <div>{entry.date}</div>
               <button onClick={() => deleteEntry(entry.id)}>Delete</button>
             </div>
           ))}
