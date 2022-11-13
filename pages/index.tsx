@@ -33,6 +33,9 @@ const Login = () => {
         onChange={(e) => setPassword(e.target.value)}
       />
       <button onClick={signInWithEmail}>Sign in</button>
+      {/* Sign up */}
+      <Auth supabaseClient={supabase} />
+
         </div>
       ) : (
         <Home session={session} />
